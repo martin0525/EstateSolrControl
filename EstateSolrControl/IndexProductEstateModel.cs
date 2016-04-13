@@ -99,8 +99,24 @@ namespace EstateSolrControl
             }
 
             var result = updateOperations.Update("collection1", "/update", new UpdateOptions() { Docs = docs });
+            var header = binaryResponseHeaderParser.Parse(result);
+
+            System.Console.WriteLine(string.Format("Update Status:{0} QTime:{1}", header.Status, header.QTime));
+            System.Console.ReadLine();
+
         }
 
+        /// <summary>
+        /// 根据id删除
+        /// </summary>
+        public void Delete()
+        {
+            var result = updateOperations.Update("collection1", "/update", new UpdateOptions() { OptimizeOptions = optimizeOptions, DelById = new string[] { "89C88185-B541-42CC-9AD0-C7A978AD7680" } });
+            var header = binaryResponseHeaderParser.Parse(result);
+
+            System.Console.WriteLine(string.Format("Update Status:{0} QTime:{1}", header.Status, header.QTime));
+            System.Console.ReadLine();
+        }
 
 
     }
