@@ -100,5 +100,8 @@ namespace EstateSolrControl
 
             var result = updateOperations.Update("collection1", "/update", new UpdateOptions() { Docs = docs });
         }
+
+
+
     }
 }
