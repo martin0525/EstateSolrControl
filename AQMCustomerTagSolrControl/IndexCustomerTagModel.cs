@@ -81,7 +81,7 @@ namespace AQMCustomerTagSolrControl
             var header = binaryResponseHeaderParser.Parse(result);
 
             System.Console.WriteLine(string.Format("Update Status:{0} QTime:{1}", header.Status, header.QTime));
-            System.Console.ReadLine();
+            //System.Console.ReadLine();
 
         }
 
