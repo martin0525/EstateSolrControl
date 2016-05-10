@@ -18,7 +18,7 @@ namespace AQMCustomerTagSolrControl
         {
         }
 
-        public string customer_id { get; set; }
+        
 
         public string mobile { get; set; }
 
@@ -35,6 +35,15 @@ namespace AQMCustomerTagSolrControl
 
         public float bmconfidence { get; set; }
 
+        public string rttag { get; set; }
+        public string buyprefer { get; set; }
+        public string acregion { get; set; }
+        public string childtag { get; set; }
+
+        public float ctconfidence { get; set; }
+        public string familytag { get; set; }
+        public string preferproject { get; set; }
+
 
     }
 
@@ -42,6 +51,7 @@ namespace AQMCustomerTagSolrControl
     {
 
         static OptimizeOptions optimizeOptions = new OptimizeOptions();
+        static CommitOptions commitOptions = new CommitOptions() { SoftCommit = true };
         static ISolrResponseParser<NamedList, ResponseHeader> binaryResponseHeaderParser = new BinaryResponseHeaderParser();
         static IUpdateParametersConvert<NamedList> updateParametersConvert = new BinaryUpdateParametersConvert();
         static ISolrUpdateConnection<NamedList, NamedList> solrUpdateConnection = new SolrUpdateConnection<NamedList, NamedList>() { ServerUrl = "http://172.28.70.71:8080/solr/" };
@@ -77,7 +87,7 @@ namespace AQMCustomerTagSolrControl
 
             }
 
-            var result = updateOperations.Update("core1", "/update", new UpdateOptions() { Docs = docs });
+            var result = updateOperations.Update("core1", "/update", new UpdateOptions() { Docs = docs ,CommitOptions=commitOptions});
             var header = binaryResponseHeaderParser.Parse(result);
 
             System.Console.WriteLine(string.Format("Update Status:{0} QTime:{1}", header.Status, header.QTime));
