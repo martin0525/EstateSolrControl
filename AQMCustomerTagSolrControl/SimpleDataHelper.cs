@@ -12,13 +12,13 @@ namespace AQMCustomerTagSolrControl
         /// <summary>
         /// 连接字符串模板
         /// </summary>
-        internal static string connectionStringCC = ConfigurationManager.ConnectionStrings["AQM_TAG_OUTPUT"].ConnectionString;
+        internal static string connectionStringCC = ConfigurationManager.ConnectionStrings["BQM_TAG_OUTPUT"].ConnectionString;
 
         /// <summary>
         /// 查询楼盘信息接口用
         /// </summary>
         /// 
-        public static readonly string CoreCenterConnectionString = string.Format(connectionStringCC, "AQM_TAG_OUTPUT");
+        public static readonly string CoreCenterConnectionString = string.Format(connectionStringCC, "BQM_TAG_OUTPUT");
 
 
         public static System.Data.DataSet Query(string ConnString, string sql)

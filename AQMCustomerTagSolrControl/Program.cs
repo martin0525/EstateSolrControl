@@ -37,6 +37,7 @@ namespace AQMCustomerTagSolrControl
       ,[ctconfidence]
       ,[familytag]
       ,[preferproject]
+,[wbtag]
   FROM [customer_tag_result] with(nolock) where id>{0} and id <={1}",(i * 100000).ToString(),((i+1)*100000).ToString());
 
                     Console.WriteLine("读取数据源。。。");

@@ -44,6 +44,7 @@ namespace AQMCustomerTagSolrControl
         public string familytag { get; set; }
         public string preferproject { get; set; }
 
+        public string wbtag { get; set; }
 
     }
 
