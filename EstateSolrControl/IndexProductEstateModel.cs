@@ -31,7 +31,7 @@ namespace EstateSolrControl
 
         public string Region { get; set; }
         public string Circle { get; set; }
-        public string Name { get; set; }
+        public string EstateName { get; set; }
         public string Address { get; set; }
 
         public float X { get; set; }
@@ -56,6 +56,10 @@ namespace EstateSolrControl
 
         public System.DateTime CreateDate { get; set; }
 
+        public string EstateID { get; set; }
+
+        public string SourceFrom { get; set; }
+
         #endregion
     }
 
@@ -65,10 +69,10 @@ namespace EstateSolrControl
         static OptimizeOptions optimizeOptions = new OptimizeOptions();
         static ISolrResponseParser<NamedList, ResponseHeader> binaryResponseHeaderParser = new BinaryResponseHeaderParser();
         static IUpdateParametersConvert<NamedList> updateParametersConvert = new BinaryUpdateParametersConvert();
-        static ISolrUpdateConnection<NamedList, NamedList> solrUpdateConnection = new SolrUpdateConnection<NamedList, NamedList>() { ServerUrl = "http://172.28.70.71:8080/solr/" };
+        static ISolrUpdateConnection<NamedList, NamedList> solrUpdateConnection = new SolrUpdateConnection<NamedList, NamedList>() { ServerUrl = "http://10.0.81.5:8080/solr/" };
         static ISolrUpdateOperations<NamedList> updateOperations = new SolrUpdateOperations<NamedList, NamedList>(solrUpdateConnection, updateParametersConvert) { ResponseWriter = "javabin" };
 
-        static ISolrQueryConnection<NamedList> connection = new SolrQueryConnection<NamedList>() { ServerUrl = "http://172.28.70.71:8080/solr/" };
+        static ISolrQueryConnection<NamedList> connection = new SolrQueryConnection<NamedList>() { ServerUrl = "http://10.0.81.5:8080/solr/" };
         static ISolrQueryOperations<NamedList> operations = new SolrQueryOperations<NamedList>(connection) { ResponseWriter = "javabin" };
 
         /// <summary>

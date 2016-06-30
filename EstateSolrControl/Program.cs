@@ -12,7 +12,7 @@ namespace EstateSolrControl
         {
 
             //删除全部索引
-            //http://172.28.70.71:8080/solr/update/?stream.body=<delete><query>*:*</query></delete>&stream.contentType=text/xml;charset=utf-8&commit=true
+            //http://10.0.81.5:8080/solr/update/?stream.body=<delete><query>*:*</query></delete>&stream.contentType=text/xml;charset=utf-8&commit=true
 
             #region Try to add all data to Index
             try
@@ -22,7 +22,7 @@ namespace EstateSolrControl
                 ,[City]
                 ,[Region]
                 ,[Circle]
-                ,[Name]
+                ,[EstateName]
                 ,[Address]
                 ,[X]
                 ,[Y]
@@ -38,6 +38,8 @@ namespace EstateSolrControl
                 ,[MultiNamePY]
                 ,[MultiAddressPY]
                 ,[CreateDate]
+                ,[EstateID]
+                ,[SourceFrom]
             FROM [dbo].[TB_ESTATE_BASEINFO_FULLINDEX] where state =1";
 
                 Console.WriteLine("读取数据源。。。");
