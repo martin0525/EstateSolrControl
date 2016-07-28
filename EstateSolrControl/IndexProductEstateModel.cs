@@ -9,6 +9,7 @@ using System.Data;
 using EasyNet.Solr;
 using EasyNet.Solr.Impl;
 using EasyNet.Solr.Commons;
+using System.Collections;
 
 namespace EstateSolrControl
 {
@@ -31,7 +32,7 @@ namespace EstateSolrControl
 
         public string Region { get; set; }
         public string Circle { get; set; }
-        public string EstateName { get; set; }
+        public string Name { get; set; }
         public string Address { get; set; }
 
         public float X { get; set; }
@@ -51,12 +52,11 @@ namespace EstateSolrControl
         public string MultiName { get; set; }
         public string MultiAddress { get; set; }
 
-        public string MultiNamePY { get; set; }
-        public string MultiAddressPY { get; set; }
+       
 
-        public System.DateTime CreateDate { get; set; }
+        public System.DateTime CreateTime { get; set; }
 
-        public string EstateID { get; set; }
+        public string FullIndex { get; set; }
 
         public string SourceFrom { get; set; }
 
@@ -113,13 +113,47 @@ namespace EstateSolrControl
         /// <summary>
         /// 根据id删除
         /// </summary>
-        public void Delete()
+        public void Delete(string[] indexid)
         {
-            var result = updateOperations.Update("collection1", "/update", new UpdateOptions() { OptimizeOptions = optimizeOptions, DelById = new string[] { "89C88185-B541-42CC-9AD0-C7A978AD7680" } });
+            var result = updateOperations.Update("collection1", "/update", new UpdateOptions() { OptimizeOptions = optimizeOptions, DelById = indexid });
             var header = binaryResponseHeaderParser.Parse(result);
 
             System.Console.WriteLine(string.Format("Update Status:{0} QTime:{1}", header.Status, header.QTime));
-            System.Console.ReadLine();
+          //  System.Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Add原则操作
+        /// </summary>
+        public void AtomAdd(object data)
+        {
+            var docs = new List<SolrInputDocument>();
+            DataTable list = data as DataTable;
+            foreach (DataRow pro in list.Rows)
+            {
+                var model = new SolrInputDocument();
+
+                PropertyInfo[] properites = typeof(IndexProductEstateModel).GetProperties();//得到实体类属性的集合
+                string[] dateFields = { "CreateTime" };
+                string field = string.Empty;//存储fieldname
+                foreach (PropertyInfo propertyInfo in properites)//遍历数组
+                {
+                    object val = pro[propertyInfo.Name];
+                    if (val != DBNull.Value)
+                    {
+                        model.Add(propertyInfo.Name, new SolrInputField(propertyInfo.Name, val));
+                    }
+                }
+                docs.Add(model);
+
+
+            }
+
+            var result = updateOperations.Update("collection1", "/update", new UpdateOptions() { Docs = docs });
+            var header = binaryResponseHeaderParser.Parse(result);
+
+            System.Console.WriteLine(string.Format("Update Status:{0} QTime:{1}", header.Status, header.QTime));
+       
         }
 
 
