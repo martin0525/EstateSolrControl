@@ -99,14 +99,14 @@ namespace EstateSolrControl
                 //Delete a record by indexid
 
                 Console.WriteLine("删除有更新的数据。。。");
-                //string[] indexid = new string[result.Tables[0].Rows.Count];
+                string[] indexid = new string[result.Tables[0].Rows.Count];
 
-                //for(int i = 0;i< result.Tables[0].Rows.Count; i++)
-                //{
-                //    indexid[i] = result.Tables[0].Rows[i][0].ToString();
-                //}
+                for (int i = 0; i < result.Tables[0].Rows.Count; i++)
+                {
+                    indexid[i] = result.Tables[0].Rows[i][0].ToString();
+                }
 
-                //it.Delete(indexid);
+                it.Delete(indexid);
 
                 Console.WriteLine("完成删除。。。");
 
