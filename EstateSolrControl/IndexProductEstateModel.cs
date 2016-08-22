@@ -60,6 +60,8 @@ namespace EstateSolrControl
 
         public string SourceFrom { get; set; }
 
+        public string DataSource { get; set; }
+
         #endregion
     }
 
@@ -102,11 +104,11 @@ namespace EstateSolrControl
 
             }
 
-            var result = updateOperations.Update("collection1", "/update", new UpdateOptions() { Docs = docs });
+            var result = updateOperations.Update("collection1", "/update", new UpdateOptions() { OptimizeOptions = optimizeOptions, Docs = docs });
             var header = binaryResponseHeaderParser.Parse(result);
 
             System.Console.WriteLine(string.Format("Update Status:{0} QTime:{1}", header.Status, header.QTime));
-            System.Console.ReadLine();
+            //System.Console.ReadLine();
 
         }
 

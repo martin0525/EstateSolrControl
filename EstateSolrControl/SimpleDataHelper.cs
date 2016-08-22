@@ -40,5 +40,31 @@ namespace EstateSolrControl
             }
             return result;
         }
+
+        public static bool UpdateRecordTime(string ConnString, DateTime LastTime)
+        {
+            using (System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection())
+            {
+                conn.ConnectionString = ConnString;
+                conn.Open();
+                int ResultCount = 0;
+                using (System.Data.SqlClient.SqlCommand command = conn.CreateCommand())
+                {
+                    command.CommandText = "Update [dbo].[TB_ESTATE_BASE_FULLIND_UPDATE_INFO] set [LastUpdateTime] = '"
+                        + LastTime.ToString("yyyy-MM-dd HH:mm:ss.fff") + "'";
+
+                    ResultCount = command.ExecuteNonQuery();
+
+                }
+                conn.Close();
+
+                if (ResultCount < 1)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
